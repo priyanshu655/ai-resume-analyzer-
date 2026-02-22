@@ -1,8 +1,14 @@
-const axios = require("axios");
+const Bytez = require("bytez.js");
+
+const key = process.env.BYTEZ_API_KEY; // Better to store in .env
+const sdk = new Bytez(key);
+
+// Choose GPT-4o model
+const model = sdk.model("openai/gpt-4o");
 
 exports.analyzeWithAI = async (resumeText, jobDescription) => {
   try {
-const prompt = `
+    const prompt = `
 You are a strict JSON generator.
 
 Return ONLY valid JSON.
@@ -30,25 +36,30 @@ Job Description:
 ${jobDescription}
 `;
 
-    const response = await axios.post("http://localhost:11434/api/generate", {
-      model: "deepseek-v3.1:671b-cloud",
-      prompt: prompt,
-      stream: false
-    });
+    // 🔥 Send prompt to GPT-4o
+    const { error, output } = await model.run([
+      {
+        role: "user",
+        content: prompt
+      }
+    ]);
 
-    let aiText = response.data.response;
+    if (error) {
+      throw new Error(error.message || "Bytez API Error");
+    }
 
-    // 🔍 Debug raw output (very important during development)
+    let aiText = output?.text || output?.content || "";
+
     console.log("RAW AI RESPONSE:");
     console.log(aiText);
 
-    // 🔥 Remove markdown formatting if model adds it
+    // 🔥 Remove markdown if model adds it
     aiText = aiText
       .replace(/```json/g, "")
       .replace(/```/g, "")
       .trim();
 
-    // 🔥 Extract JSON block safely
+    // 🔥 Extract JSON safely
     const start = aiText.indexOf("{");
     const end = aiText.lastIndexOf("}");
 
@@ -61,16 +72,10 @@ ${jobDescription}
     console.log("CLEANED JSON:");
     console.log(cleanedJSON);
 
-    // 🔥 Safely parse JSON
-    try {
-      return JSON.parse(cleanedJSON);
-    } catch (parseError) {
-      console.error("JSON PARSE FAILED:", cleanedJSON);
-      throw new Error("AI returned invalid JSON format");
-    }
+    return JSON.parse(cleanedJSON);
 
   } catch (error) {
-    console.error("OLLAMA ERROR:", error.message);
+    console.error("BYTEZ ERROR:", error.message);
     throw error;
   }
 };
