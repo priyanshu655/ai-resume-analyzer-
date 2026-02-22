@@ -10,7 +10,7 @@ connectDB();
 
 //middleware-1
 app.use(cors({
-  origin: "https://ai-resume-analyzer-wheat-rho.vercel.app/"
+  origin: "https://ai-resume-analyzer-wheat-rho.vercel.app"
 }));
 //middleware-2
 app.use(express.json());
