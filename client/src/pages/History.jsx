@@ -19,20 +19,22 @@ const styles = `
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 16px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.07);
     background: rgba(15,14,23,0.85);
     backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 50;
+    gap: 10px;
   }
 
   .logo {
     font-family: 'Syne', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.5px;
+    flex-shrink: 0;
   }
 
   .logo .dot { color: #ff8906; }
@@ -40,18 +42,20 @@ const styles = `
 
   .back-btn {
     font-family: 'Nunito', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.12);
     color: #a7a9be;
-    padding: 9px 20px;
+    padding: 8px 16px;
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
+    touch-action: manipulation;
   }
 
   .back-btn:hover {
@@ -63,12 +67,12 @@ const styles = `
   .main {
     max-width: 800px;
     margin: 0 auto;
-    padding: 56px 24px 80px;
+    padding: 48px 20px 80px;
   }
 
   /* ── HEADER ── */
   .page-header {
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 
   .page-badge {
@@ -82,12 +86,12 @@ const styles = `
     text-transform: uppercase;
     padding: 6px 16px;
     border-radius: 100px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .page-header h1 {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 4vw, 42px);
+    font-size: clamp(26px, 5vw, 42px);
     font-weight: 800;
     letter-spacing: -1px;
     line-height: 1.1;
@@ -126,7 +130,7 @@ const styles = `
   /* ── EMPTY ── */
   .empty-state {
     text-align: center;
-    padding: 80px 24px;
+    padding: 60px 20px;
     background: #1a1826;
     border: 1px solid rgba(255,255,255,0.07);
     border-radius: 24px;
@@ -147,7 +151,7 @@ const styles = `
   .history-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
   .history-card {
@@ -169,28 +173,30 @@ const styles = `
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* ── CARD TOP ── */
   .card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px;
+    padding: 18px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.06);
-    flex-wrap: wrap;
     gap: 12px;
+    flex-wrap: wrap;
   }
 
   .score-pill {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-shrink: 0;
   }
 
   .score-circle {
-    width: 48px; height: 48px;
+    width: 46px; height: 46px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Syne', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     flex-shrink: 0;
   }
@@ -201,7 +207,7 @@ const styles = `
 
   .score-label {
     font-family: 'Syne', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
   }
 
@@ -222,11 +228,10 @@ const styles = `
   .card-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
   }
 
   .info-block {
-    padding: 18px 24px;
+    padding: 16px 20px;
   }
 
   .info-block:first-child {
@@ -264,12 +269,92 @@ const styles = `
     border-radius: 50%;
     background: currentColor;
     display: inline-block;
+    flex-shrink: 0;
   }
 
   .info-block p {
     font-size: 13px;
     color: #c8cad8;
     line-height: 1.7;
+  }
+
+  /* ── MOBILE RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav {
+      padding: 12px 14px;
+    }
+
+    .logo { font-size: 18px; }
+
+    .back-btn {
+      font-size: 11px;
+      padding: 7px 12px;
+    }
+
+    /* Hide "Back to Dashboard" text, keep arrow on very narrow screens */
+    .back-btn-label { display: inline; }
+
+    .main {
+      padding: 32px 14px 60px;
+    }
+
+    .page-header {
+      margin-bottom: 24px;
+    }
+
+    /* Card top: score pill left, date below on wrap */
+    .card-top {
+      padding: 14px 16px;
+      gap: 8px;
+    }
+
+    .score-circle {
+      width: 40px; height: 40px;
+      font-size: 11px;
+    }
+
+    .score-label { font-size: 13px; }
+
+    /* Card body: stack the two columns */
+    .card-body {
+      grid-template-columns: 1fr;
+    }
+
+    .info-block {
+      padding: 14px 16px;
+    }
+
+    /* Reset the border rules for single-column layout */
+    .info-block:first-child {
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .info-block:nth-child(2) {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .info-block.full {
+      border-bottom: none;
+    }
+
+    .history-card:hover {
+      transform: none; /* disable hover lift on touch devices */
+    }
+  }
+
+  @media (max-width: 380px) {
+    .logo { font-size: 16px; }
+
+    .back-btn-label { display: none; }
+
+    .back-btn {
+      padding: 7px 10px;
+    }
+
+    .page-header h1 { letter-spacing: -0.5px; }
+
+    .empty-state { padding: 48px 16px; }
   }
 `;
 
@@ -313,7 +398,7 @@ function History() {
         <nav className="nav">
           <div className="logo">res<span className="dot">.</span>ume<span className="ai">AI</span></div>
           <button className="back-btn" onClick={() => navigate("/dashboard")}>
-            ← Back to Dashboard
+            ← <span className="back-btn-label">Back to Dashboard</span>
           </button>
         </nav>
 

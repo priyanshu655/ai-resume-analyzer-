@@ -19,20 +19,22 @@ const styles = `
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
+    padding: 16px 20px;
     border-bottom: 1px solid rgba(255,255,255,0.07);
     backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 50;
     background: rgba(15,14,23,0.85);
+    gap: 10px;
   }
 
   .logo {
     font-family: 'Syne', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.5px;
+    flex-shrink: 0;
   }
 
   .logo .dot { color: #ff8906; }
@@ -40,15 +42,16 @@ const styles = `
 
   .logout-btn {
     font-family: 'Nunito', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.12);
     color: #a7a9be;
-    padding: 9px 20px;
+    padding: 8px 14px;
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
   }
 
   .logout-btn:hover {
@@ -59,15 +62,16 @@ const styles = `
 
   .history-btn {
     font-family: 'Nunito', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     background: rgba(44,182,125,0.12);
     border: 1px solid rgba(44,182,125,0.3);
     color: #2cb67d;
-    padding: 9px 20px;
+    padding: 8px 14px;
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
   }
 
   .history-btn:hover {
@@ -79,13 +83,14 @@ const styles = `
   .nav-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
 
   /* ── HERO ── */
   .hero {
     text-align: center;
-    padding: 72px 24px 48px;
+    padding: 52px 20px 36px;
     position: relative;
   }
 
@@ -94,7 +99,7 @@ const styles = `
     position: absolute;
     top: 0; left: 50%;
     transform: translateX(-50%);
-    width: 600px; height: 300px;
+    width: min(600px, 100%); height: 300px;
     background: radial-gradient(ellipse, rgba(229,49,112,0.18) 0%, transparent 70%);
     pointer-events: none;
   }
@@ -110,16 +115,16 @@ const styles = `
     text-transform: uppercase;
     padding: 6px 16px;
     border-radius: 100px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .hero h1 {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(36px, 5vw, 58px);
+    font-size: clamp(28px, 7vw, 58px);
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -1px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .hero h1 .pink   { color: #e53170; }
@@ -127,7 +132,7 @@ const styles = `
   .hero h1 .teal   { color: #2cb67d; }
 
   .hero p {
-    font-size: 15px;
+    font-size: 14px;
     color: #a7a9be;
     max-width: 420px;
     margin: 0 auto;
@@ -138,10 +143,10 @@ const styles = `
   .main {
     max-width: 860px;
     margin: 0 auto;
-    padding: 0 24px 80px;
+    padding: 0 16px 80px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
   }
 
   .full-col { grid-column: 1 / -1; }
@@ -151,14 +156,14 @@ const styles = `
     background: #1a1826;
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
-    padding: 28px;
+    padding: 22px;
   }
 
   .card-header {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .card-icon {
@@ -189,7 +194,7 @@ const styles = `
   .file-drop {
     border: 2px dashed rgba(229,49,112,0.3);
     border-radius: 14px;
-    padding: 32px 20px;
+    padding: 28px 16px;
     text-align: center;
     cursor: pointer;
     position: relative;
@@ -217,21 +222,21 @@ const styles = `
   }
 
   .file-drop-icon {
-    font-size: 28px;
-    margin-bottom: 10px;
+    font-size: 26px;
+    margin-bottom: 8px;
   }
 
-  .file-drop p { font-size: 13px; color: #a7a9be; }
-  .file-drop .file-name { font-size: 13px; font-weight: 600; color: #2cb67d; }
+  .file-drop p { font-size: 12px; color: #a7a9be; }
+  .file-drop .file-name { font-size: 12px; font-weight: 600; color: #2cb67d; word-break: break-all; }
 
   /* ── TEXTAREA ── */
   textarea {
     width: 100%;
-    height: 140px;
+    height: 130px;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 14px;
-    padding: 16px;
+    padding: 14px;
     font-family: 'Nunito', sans-serif;
     font-size: 13px;
     color: #fffffe;
@@ -247,7 +252,7 @@ const styles = `
   /* ── BUTTON ── */
   .analyze-btn {
     width: 100%;
-    padding: 17px;
+    padding: 16px;
     border: none;
     border-radius: 14px;
     background: linear-gradient(135deg, #e53170 0%, #ff8906 100%);
@@ -263,9 +268,11 @@ const styles = `
     justify-content: center;
     gap: 10px;
     box-shadow: 0 8px 32px rgba(229,49,112,0.3);
+    touch-action: manipulation;
   }
 
   .analyze-btn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+  .analyze-btn:active:not(:disabled) { transform: translateY(0); opacity: 0.85; }
   .analyze-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
   .spinner {
@@ -274,6 +281,7 @@ const styles = `
     border-top-color: #fff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -283,16 +291,17 @@ const styles = `
     background: #1a1826;
     border: 1px solid rgba(229,49,112,0.2);
     border-radius: 20px;
-    padding: 36px 28px;
+    padding: 28px 22px;
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 22px;
     animation: fadeUp 0.5s ease;
+    flex-wrap: wrap;
   }
 
   .score-ring {
     flex-shrink: 0;
-    width: 100px; height: 100px;
+    width: 96px; height: 96px;
     border-radius: 50%;
     background: conic-gradient(#e53170 0%, #ff8906 var(--pct, 0%), rgba(255,255,255,0.06) var(--pct, 0%));
     display: flex; align-items: center; justify-content: center;
@@ -309,16 +318,18 @@ const styles = `
 
   .score-num {
     font-family: 'Syne', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
     position: relative;
     z-index: 1;
     line-height: 1;
   }
 
+  .score-info { flex: 1; min-width: 160px; }
+
   .score-info h3 {
     font-family: 'Syne', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     margin-bottom: 6px;
   }
@@ -333,13 +344,13 @@ const styles = `
   .result-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 14px;
     animation: fadeUp 0.5s ease;
   }
 
   .result-section {
     border-radius: 16px;
-    padding: 22px;
+    padding: 20px;
   }
 
   .rs-matched { background: rgba(44,182,125,0.08);  border: 1px solid rgba(44,182,125,0.2); }
@@ -366,6 +377,7 @@ const styles = `
     border-radius: 50%;
     background: currentColor;
     display: inline-block;
+    flex-shrink: 0;
   }
 
   .result-section p { font-size: 13px; line-height: 1.75; color: #c8cad8; }
@@ -373,6 +385,93 @@ const styles = `
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MOBILE RESPONSIVE ── */
+
+  /* Tablets & small desktops (≤ 640px) → single column everything */
+  @media (max-width: 640px) {
+    .nav {
+      padding: 12px 16px;
+    }
+
+    .logo {
+      font-size: 18px;
+    }
+
+    .history-btn,
+    .logout-btn {
+      font-size: 11px;
+      padding: 7px 11px;
+    }
+
+    /* On very small screens, hide the label text on history button, show just icon */
+    .history-btn-label { display: none; }
+
+    .hero {
+      padding: 36px 16px 28px;
+    }
+
+    .hero p {
+      font-size: 13px;
+    }
+
+    /* Stack the two cards vertically */
+    .main {
+      grid-template-columns: 1fr;
+      padding: 0 14px 60px;
+      gap: 14px;
+    }
+
+    /* result grid: stack matched/missing vertically */
+    .result-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .rs-suggest {
+      grid-column: 1 / -1;
+    }
+
+    .score-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 22px 18px;
+    }
+
+    .score-info { min-width: unset; }
+
+    .card {
+      padding: 18px;
+    }
+
+    .file-drop {
+      padding: 22px 14px;
+    }
+
+    textarea {
+      height: 120px;
+    }
+
+    .analyze-btn {
+      font-size: 14px;
+      padding: 15px;
+    }
+  }
+
+  /* Extra small phones (≤ 380px) */
+  @media (max-width: 380px) {
+    .logo { font-size: 16px; }
+
+    .history-btn { display: none; }
+
+    .hero h1 { font-size: 26px; letter-spacing: -0.5px; }
+
+    .score-ring {
+      width: 80px; height: 80px;
+    }
+
+    .score-num { font-size: 17px; }
   }
 `;
 
@@ -416,7 +515,9 @@ function Dashboard() {
         <nav className="nav">
           <div className="logo">res<span className="dot">.</span>ume<span className="ai">AI</span></div>
           <div className="nav-actions">
-            <button className="history-btn" onClick={() => navigate("/history")}>🕒 View History</button>
+            <button className="history-btn" onClick={() => navigate("/history")}>
+              🕒 <span className="history-btn-label">View History</span>
+            </button>
             <button className="logout-btn" onClick={handleLogout}>← Logout</button>
           </div>
         </nav>
