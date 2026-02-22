@@ -10,7 +10,13 @@ connectDB();
 
 //middleware-1
 app.use(cors({
-  origin: "https://ai-resume-analyzer-wheat-rho.vercel.app",
+  origin: function (origin, callback) {
+    if (!origin || origin.includes("vercel.app")) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 //middleware-2
